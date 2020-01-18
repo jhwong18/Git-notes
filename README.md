@@ -1,6 +1,6 @@
 ## Table of Contents
 
-[Repository and Working Directory](#Repository and Working Directory)
+[Git Objects, Git IDs](#Git-object-Git-IDs)
 
   1. [Repository](#repository)
   2. [Working Directory](#working-directory)
@@ -23,12 +23,28 @@
   3. [Add, Commit and Push to Remote Repository](#Add-Commit-Push-Repository)
   3. [Git Status](#Git-Status)
   3. [Git Tags](#Git-Tags)
+  3. [Creating a file on Git Bash](#Create-file-on-Git-Bash)
+  3. [Git Merge](#Git-Merge)
   3. [Working Directory](#working-directory)
+
 
 
 [References](#references)
 
 <br />
+
+## Git Objects, Git IDs
+<a name="Git-object-Git-IDs"></a>
+Git objects, Git IDs
+Internally, Git uses objects to store four types of things. A commit object is a simple text file that contains information such as the commit user information, commit message, a reference to the commits parent or parents and a reference to the root tree of the project. That information is all that Git needs to rebuild the full contents of a commit. An annotated tag is a reference to a specific commit. A tree is an object that contains a list of the file names and directories inside of a directory. A blob is an object that stores the content of a file that is being managed by Git. A typical Git user may only interact with commit objects and tags, letting Git worry about the details related to trees and blobs. Git keeps these objects internally in something called the object store but you typically don't directly interact with the object store.
+
+ 
+ - Getting Git IDs (SHA-1) on Git Bash
+   ```bash
+   git hash-object <file>
+   ```
+ - OR operation
+
 
 ## Repository and Working Directory
 
@@ -180,6 +196,63 @@ Git Tags
    # To create a temporary tag
    git tag -a -m "just a temp tag" temp HEAD~
    git tag -d temp
+   ```
+<a name="#Git-Branch"></a>
+Git Branch
+ - To create a new branch in local repository
+   ```bash
+   # two command approach
+   git branch <feature branch name>
+   git checkout <feature branch name>
+   # one command approach
+   git checkout -b <feature branch name>
+   ```
+ - To delete a new branch in local repository
+   ```bash
+   # switch to another branch first
+   git checkout master 
+   git branch -d <feature branch name>
+   ```
+ - To rollback the commits or branches deleted
+   ```bash
+   # to see the list of commits made
+   git reflog
+   # copy the SHA-1 code for the commit made
+   git checkout -b <branch name> <SHA-1>
+   ```
+
+<a name="#Create-file-on-Git-Bash"></a>
+Creating a file on Git Bash
+ - To create a new file in local repository using Git Bash
+ - Using Git command touch, only creates the file 
+   ```bash
+      newFile.txt
+   ```
+ - Using Git command echo, only creates the file 
+   ```bash
+      echo > <new_file.txt>
+      echo "Added another line to file" >> <file_name.txt>
+   ```
+ - Using Git command cat, only creates the file and can start appending to the file
+   ```bash
+      cat > newFile.txt
+   ```
+ - Using Git command vim, only creates the file and can start editing to the file. To use the text editor, press Escape to exit insert mode and then type :wq (write/save and quit, or :q! if you want to cancel and return to the prompt).
+   ```bash
+      vim newFile.txt
+   ```
+
+<a name="#Git-Merge"></a>
+Merging branches on Git Bash
+  - To merge two branches 
+   ```bash
+      git checkout <destination-branch-name>
+      git merge <source-branch-names>
+   ```
+   - To merge commit two branches. This creates a non-linear history.
+   ```bash
+      git checkout <destination-branch-name>
+      git merge --no-ff <source-branch-names>
    ```
 
 
