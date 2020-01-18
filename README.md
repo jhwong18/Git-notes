@@ -20,9 +20,10 @@
   1. [How to read Git commands](#How-to-read-Git-commands)
   1. [Git configurations](#Git-configurations)
   2. [Create Repository](#Create-Repository)
-  3. [Commit Repository](#Commit-Repository)
+  3. [Add, Commit and Push to Remote Repository](#Add-Commit-Push-Repository)
+  3. [Git Status](#Git-Status)
+  3. [Git Tags](#Git-Tags)
   3. [Working Directory](#working-directory)
-
 
 
 [References](#references)
@@ -103,7 +104,7 @@ Create Repository
 
  - Clone (download) a local repository from a remote repository that already exists on GitHub, including all of the files, branches, and commits
    ```bash
-   git clone [url]
+   git clone <url> [project name]
    ```
 
  - Create a local repository and push a to a remote repository that already exists on GitHub with new commits
@@ -114,7 +115,7 @@ Create Repository
    git push origin <branch name in remote repo>
    ```
    
- - Create a local repository and push a this new remote repository
+ - Create a local repository and push a this new remote repository. Git remote add command helps to add information about the remote repository to the local repository. This is for importing a remote repo to an existing local repo instead of cloning the remote repo.
    ```bash
    git init
    git add <file>
@@ -125,9 +126,16 @@ Create Repository
    ```
 
 
-<a name="#Commit-Repository"></a>
-Commit to Repository
+<a name="#Add-Commit-Push-Repository"></a>
+Add, Commit and Push to remote Repository
 
+ - Add files to staging area in a local repository  
+   ```bash
+   git add <file>
+   # adds all untracked and modified files
+   git add .
+   ```
+   
  - Create a local repository and push a this new remote repository. -m adds a message. commit -a combines the adds and commit command 
    ```bash
    git add <file>
@@ -136,6 +144,7 @@ Commit to Repository
    ```
 
  - Push changes from local to remote repository. -u flag sets up the local and remote branches. Origin is a shortcut name for the remote repository. master is the branch to push. We are pushing the default branch named master. Checking out a local branch from a remote branch automatically creates what is called a tracking branch. Tracking branches are local branches that have a direct relationship to a remote branch. If you’re on a tracking branch and type git push, Git automatically knows which server and branch to push to. Also, running git pull while on one of these branches fetches all the remote references and then automatically merges in the corresponding remote branch.
+ 
    ```bash
    git push -u origin master
    git push origin master
@@ -143,10 +152,37 @@ Commit to Repository
  - View the commit history
    ```bash
    git log
-   git log --oneline 
+   git log --oneline
+   # limit to 2 latest commits
+   git log --oneline -2 
    ```
 
-   
+<a name="#Git-Status"></a>
+Git Status
+ - View the status of the files in working tree and staging area. Untracked files are files not in staging area.
+   ```bash
+   git status
+   # short status
+   git status -s
+   ```
+<a name="#Git-Tags"></a>
+Git Tags
+ - View the status of the files in working tree and staging area. Untracked files are files not in staging area.
+   ```bash
+   # To view all tags
+   git tag
+   # -a helps to create an annotated tag 
+   git tag -a -m "message" <name of the tag>
+   # To view a specific tag
+   git tag v0.1
+   # To push tag to remote repo
+   git push origin v0.1
+   # To create a temporary tag
+   git tag -a -m "just a temp tag" temp HEAD~
+   git tag -d temp
+   ```
+
+
 <a name="References"></a>
 ## References
 
